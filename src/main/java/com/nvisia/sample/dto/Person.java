@@ -3,6 +3,10 @@ package com.nvisia.sample.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * Person data transfer object used to share the information this application
+ * stores about people.
+ */
 public class Person implements Serializable {
 
 	private static final long serialVersionUID = 1L;

@@ -14,9 +14,11 @@
 	<properties>
 		<spring.version>3.2.8.RELEASE</spring.version>
 		<hibernate.version>4.3.3.Final</hibernate.version>
+		<derby.version>10.11.1.1</derby.version>
 	</properties>
 
 	<dependencies>
+		<!-- Spring dependencies -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
@@ -27,7 +29,6 @@
 			<artifactId>spring-orm</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
@@ -39,6 +40,7 @@
 			<version>${spring.version}</version>
 		</dependency>
 
+		<!-- Hibernate dependencies -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
@@ -50,10 +52,7 @@
 			<version>${hibernate.version}</version>
 		</dependency>
 
-
-
-
-
+		<!-- Apache Commons Dependencies -->
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
@@ -75,27 +74,21 @@
 			<version>1.4</version>
 		</dependency>
 
-		<!-- <dependency> <groupId>log4j</groupId> <artifactId>log4j</artifactId> 
-			<version>1.2.15</version> </dependency> -->
-
-		<!-- <dependency> <groupId>hsqldb</groupId> <artifactId>hsqldb</artifactId> 
-			<version>1.8.0.10</version> <scope>test</scope> </dependency> -->
+		<!-- Use Derby for unit-testing -->
 		<dependency>
 			<groupId>org.apache.derby</groupId>
 			<artifactId>derbyclient</artifactId>
-			<version>10.11.1.1</version>
+			<version>${derby.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.derby</groupId>
 			<artifactId>derby</artifactId>
-			<version>10.11.1.1</version>
+			<version>${derby.version}</version>
 			<scope>test</scope>
 		</dependency>
 
-
-		<!-- <dependency> <groupId>org.apache.derby</groupId> <artifactId>derbynet</artifactId> 
-			<version>10.2.2.0</version> <scope>test</scope> </dependency> -->
+		<!-- JUnit and Spring-Test for unit-testing -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

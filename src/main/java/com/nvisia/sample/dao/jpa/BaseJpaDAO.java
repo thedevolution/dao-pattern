@@ -6,6 +6,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -13,6 +14,23 @@ import javax.persistence.Query;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Base class used to provide common JPA-based functionality for DAO
+ * implementations. DAO interfaces will be able to define methods (save(TO),
+ * update(TO), delete(PK), etc) that adhere to the public methods exposed on
+ * this class. This allows sub-classes to have to implement the similar CRUD
+ * methods, as long as the interface was properly written.
+ *
+ * @param <E>
+ *            The JPA-annotated {@link Entity} object.
+ * @param <PK>
+ *            The serializable primiary key object used to lookup the E (entity)
+ *            object.
+ * @param <TO>
+ *            The data-transfer object which is exposed via the DAO interface.
+ *            This DTO should mirror the Entity object, only exposing the data
+ *            needed by consumers
+ */
 public abstract class BaseJpaDAO <E, PK extends Serializable, TO> {
 
 	private Class<E> classToBePersisted;
@@ -67,18 +85,8 @@ public abstract class BaseJpaDAO <E, PK extends Serializable, TO> {
 	}
 	
 	@Transactional(readOnly = true)
-	@SuppressWarnings("unchecked")
 	public List<TO> findAll() {
-		final List<TO> toReturn = new ArrayList<TO>();
-		final List<E> entities = getEntityManager().createQuery(
-				"select E from " + classToBePersisted.getSimpleName() + " E")
-				.getResultList();
-		if (CollectionUtils.isNotEmpty(entities)) {
-			for (E entity : entities) {
-				toReturn.add(assemble(entity));
-			}
-		}
-		return toReturn;
+		return findAll(-1);
 	}
 	
 	@Transactional(readOnly = true)
@@ -87,8 +95,9 @@ public abstract class BaseJpaDAO <E, PK extends Serializable, TO> {
 		final List<TO> toReturn = new ArrayList<TO>();
 		final Query query = getEntityManager().createQuery(
 				"select E from " + classToBePersisted.getSimpleName() + " E");
-		query.setMaxResults(number);
-
+		if (number > 0) {
+			query.setMaxResults(number);
+		}
 		
 		final List<E> entities = query.getResultList();
 		if (CollectionUtils.isNotEmpty(entities)) {

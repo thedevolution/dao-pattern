@@ -4,6 +4,11 @@ import com.nvisia.sample.dao.PersonDAO;
 import com.nvisia.sample.dao.entity.PersonEntity;
 import com.nvisia.sample.dto.Person;
 
+/**
+ * JPA-implementation of the PersonDAO interface. Uses the BaseJpaDAO to
+ * implement the basic CRUD and access methods. Transforms to/from JPA-specific
+ * PersonEntity objects and the Person DTO objects.
+ */
 public class PersonJpaDAO extends BaseJpaDAO<PersonEntity, Long, Person> implements PersonDAO {
 
 	@Override

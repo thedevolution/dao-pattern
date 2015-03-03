@@ -11,13 +11,25 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.nvisia.sample.dto.Person;
 
+/**
+ * Simple unit-test to exercise the create-update-delete (CRUD) functionality of
+ * the {@link PersonDAO} implementation. Spring is used to inject an
+ * implementation of the {@link PersonDAO} object.
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:com/nvisia/sample/dao/applicationContext-PersonDAO.xml" })
 public class PersonDAOTest {
 
 	@Autowired
 	private PersonDAO personDAO;
-	
+
+	/**
+	 * Method used to test the create-update-delete while also exercising the
+	 * find functionality.
+	 * 
+	 * @throws Exception
+	 *             Generated if there are any issues that would fail this test.
+	 */
 	@Test
 	public void testCRUD() throws Exception {
 		// Instantiate the Person DTO and populate it with mock data

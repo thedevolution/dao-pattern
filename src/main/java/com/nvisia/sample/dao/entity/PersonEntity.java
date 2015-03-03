@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+/**
+ * Entity object used to represent Person data within the persistent store.
+ */
 @Entity
 public class PersonEntity implements Serializable {
 
